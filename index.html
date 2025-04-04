@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer</title>
+</head>
+<body>
+<style>
+
+body{
+width: 100vw;
+height: 100vh;
+background: #aeafaf;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+}
+
+
+#container{
+    display: block;
+    text-align: center;
+    font-size: 30px;
+}
+
+#contador{ 
+    font-size: 60px;
+    color: chartreuse;
+}
+
+</style>
+
+<div id="container"> 
+  <h1>Timer</h1>
+
+  <label for="tempo">Tempo (segundos):</label>
+  <input type="number" id="tempo" value="10">
+
+  <button onclick="comeca()">Iniciar</button>
+  <button onclick="parar()">Parar</button>
+
+  <p id="contador">0</p>
+</div>
+
+  <script>
+
+    let intervalo;
+    let tempoRestante = 0;
+
+    function comeca() {
+      tempoRestante = parseInt(document.getElementById("tempo").value);
+
+      if (isNaN(tempoRestante) || tempoRestante <= 0) {
+        alert("Por favor, insira um valor válido maior que 0.");
+        return;
+      }
+
+      document.getElementById("contador").textContent = tempoRestante;
+
+      intervalo = setInterval(() => {
+        tempoRestante--;
+        document.getElementById("contador").textContent = tempoRestante;
+
+        if (tempoRestante <= 0) {
+          clearInterval(intervalo);
+          alert("O tempo acabou!");
+        }
+      }, 1000); 
+    }
+
+    function parar() {
+      clearInterval(intervalo);
+      alert("Timer parado.");
+    }
+
+
+
+</script>
+
+</body>
+</html>
